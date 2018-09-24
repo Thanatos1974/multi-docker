@@ -1,0 +1,22 @@
+sudo: required
+services:
+    - docker
+before_install:
+    - docker build -t george/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+    - docker run george/react-test npm test -- --coverage
+
+after_success:
+    - docker build -t george/multi-client ./client
+    - docker build -t george/multi-nginx  ./nginx
+    - docker build -t george/multi-server ./server
+    - docker build -t george/multi-worker ./worker
+    
+    - echo "$docker_password" | docker login -u "$docker_id" --password-stdin
+    
+    - docker push george/multi-client
+    - docker push george/multi-nginx
+    - docker push george/multi-server
+    - docker push george/multi-worker
+    
