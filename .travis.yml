@@ -20,3 +20,15 @@ after_success:
     - docker push george/multi-server
     - docker push george/multi-worker
     
+deploy:
+    provide: elasticbeanstalk
+    region: eu-west-2
+    app: multi-docker
+    env: Multidocker-env
+    bucket_name: elasticbeanstalk-eu-west-2-803441141666
+    bucket_path: docker-multi
+    on:
+        branch: master
+        access_key_id: $AWS_ACCESS_KEY
+        secret_access_key:
+            secure: $AWS_SECRET_KEY
