@@ -21,7 +21,7 @@ after_success:
     - docker push george/multi-worker
     
 deploy:
-    provide: elasticbeanstalk
+    provider: elasticbeanstalk
     region: eu-west-2
     app: multi-docker
     env: Multidocker-env
