@@ -4,7 +4,8 @@
 			"name": "client",
 			"image": "george/multi-client",
 			"hostname": "client",
-			"essential": false
+			"essential": false,
+			"memory": 128MB
 		},
 		{
 			"name": "nginx",
@@ -14,19 +15,22 @@
 			"portMappings": [
 				{"containerPort": 80,"hostPort": 80}
 							],
-			"links": ["client", "server"]
+			"links": ["client", "server"],
+			"memory": 128MB
 		},
 		{
 			"name": "server",
 			"image": "george/multi-server",
 			"hostname": "api",
-			"essential": false
+			"essential": false,
+			"memory": 128MB
 		},
 		{
 			"name": "worker",
 			"image": "george/multi-worker",
 			"hostname": "worker",
-			"essential": false
+			"essential": false,
+			"memory": 128MB
 		}
 	]
 }
